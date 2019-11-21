@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <title>コリドール</title>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>  
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-database.js"></script>
+  </head>
+
+  <body>
+    <noscript>
+      <strong>We're sorry but quoridor doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+      <!-- built files will be auto injected -->
+      <div id="quor">
+      <div v-show="!roomID">
+        <div>
+          <button @click="createRoom">ルーム作成</button>
+        </div>
+        <div>
+          <input type="text" maxlength="3" v-model="roomNo" placeholder="Room No"v-on:keydown.enter="goRoom"> 
+          <button @click="goRoom">入る</button>
+        </div>
+      </div>
+    
+      <div v-show="roomID">
+          roomNo:{{roomID}}　userID:{{userID}}<br>
+        <table border="0">
+          <tr v-for="i in 17" class="row">
+              <td v-for="j in 17" class="col" v-bind:id="'cell'+j+','+i">
+                  <div v-if="i%2==1 && j%2==1" @click="put(j,i)" class="square">
+                    <span v-if="sync.board[j][i]==1">🔴</span>
+                    <span v-else-if="sync.board[j][i]==2">🔵</span>
+                  </div>
+                  <div v-else-if="i%2==0 && j%2==0" @click="wall(j,i)" class="wall"></div>
+                  <div v-else class="wall"></div>
+              </td>
+          </tr>
+        </table>
+      
+        🔴🚧壁：{{sync.host.wall}}枚　🔵🚧壁：{{sync.guest.wall}}枚<br>
+        あなた：<span v-if="team==1">🔴</span>
+        <span v-else-if="team==2">🔵</span>
+        ターン:
+        <span v-if="sync.turn==1">🔴</span>
+        <span v-else-if="sync.turn==2">🔵</span><br>
+
+   
+        <div class="custom-radio">
+            <input type="radio" id="put" value="put" name="custom" v-model="act" checked><label for="put">👉駒を動かす</label>
+            <input type="radio" id="wall" value="wall" name="custom" v-model="act"><label for="wall">🚧壁を置く
+              <strong><span v-if="this.LorW==1">━</span>
+              <span v-else>┃</span></strong></label>
+              <button @click="switchLorW">壁向き切替</button>
+        </div>
+    </div>
+    </div>
+  </body>
+
+<!-- Vue.js を読み込む -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="quoridor.js"></script>
+</html>

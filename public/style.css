@@ -1,0 +1,68 @@
+
+#quor{
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* 盤面のスタイル */
+table{
+    border-collapse:separate;
+    border-spacing: 0;
+    border: 1px solid;
+    border-radius: 1px;
+    background-color: #ffffff;
+    cursor:pointer;
+    font-size: 26px;
+    text-align: center;
+    margin: 0 auto;
+}
+.wall {
+  width: 8px;
+  height: 8px;
+}
+.square {
+  width: 40px;
+  height: 40px;
+}
+
+
+/* トグルボタンのスタイル */
+
+.custom-radio{
+  height: 40px;
+  margin: 10px 0px;
+}
+.custom-radio input {
+  display: none;
+}
+.custom-radio label {
+  color: #ddd;
+  border: 1px solid #ddd;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 5px 0px;
+  width: 140px;
+}
+.custom-radio label:hover{
+  color: #aaa;
+  border: 1px solid #aaa;
+  cursor: pointer;
+}
+.custom-radio input[type="radio"]:checked + label {
+  color: #000;
+  border: 1px solid #000;
+  background-color: #eaeaea;
+}
+
+.custom-radio button {
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 7px 0px;
+  width: 80px;
+  text-align: center;
+  display: inline-block;
+}
